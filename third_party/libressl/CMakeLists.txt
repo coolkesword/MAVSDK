@@ -34,7 +34,7 @@ endforeach()
 
 ExternalProject_add(
     libressl
-    URL https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-${LIBRESSL_VERSION}.tar.gz
+    URL https://github.com/coolkesword/MAVSDK/files/3481069/libressl-${LIBRESSL_VERSION}.tar.gz
     PREFIX libressl
     CMAKE_ARGS "${CMAKE_ARGS}"
     )
