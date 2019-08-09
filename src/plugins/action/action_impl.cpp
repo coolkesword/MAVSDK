@@ -59,11 +59,11 @@ Action::Result ActionImpl::arm() const
     }
 
     // Go to LOITER mode first. // For No GPS mode with vision system comment the next 5 lines.
-    ret = action_result_from_command_result(_parent->set_flight_mode(SystemImpl::FlightMode::HOLD));
+//    ret = action_result_from_command_result(_parent->set_flight_mode(SystemImpl::FlightMode::HOLD));
 
-    if (ret != Action::Result::SUCCESS) {
-        return ret;
-    }
+//    if (ret != Action::Result::SUCCESS) {
+//        return ret;
+//    }
 
     MAVLinkCommands::CommandLong command{};
 
@@ -378,7 +378,7 @@ void ActionImpl::return_to_launch_async(const Action::result_callback_t& callbac
 Action::Result ActionImpl::arming_allowed() const
 {
     // We want to wait up to 1.5 second, maybe we find out about the
-    // in-air state and can continue. If not, we need to give up.
+    // in-air state and can continue. If not, we count on pixhawk firmware to handle the risk
     unsigned tries = 0;
     while (true) {
         if (_in_air_state_known) {
@@ -395,7 +395,7 @@ Action::Result ActionImpl::arming_allowed() const
         std::this_thread::sleep_for(std::chrono::milliseconds(50));
     }
 
-    return Action::Result::COMMAND_DENIED_LANDED_STATE_UNKNOWN;
+    return Action::Result::SUCCESS;
 }
 
 Action::Result ActionImpl::taking_off_allowed() const
